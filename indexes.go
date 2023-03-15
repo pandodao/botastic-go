@@ -8,18 +8,18 @@ import (
 	"strconv"
 )
 
-type CreateIndicesItem struct {
+type CreateIndexesItem struct {
 	ObjectID   string `json:"object_id"`
 	Category   string `json:"category"`
 	Data       string `json:"data"`
 	Properties string `json:"properties"`
 }
 
-type CreateIndicesRequest struct {
-	Items []*CreateIndicesItem `json:"items"`
+type CreateIndexesRequest struct {
+	Items []*CreateIndexesItem `json:"items"`
 }
 
-type SearchIndicesRequest struct {
+type SearchIndexesRequest struct {
 	Keywords string
 	N        int
 }
@@ -33,8 +33,8 @@ type Index struct {
 	Score      float32 `json:"score"`
 }
 
-type SearchIndicesResponse struct {
-	Indices []*Index `json:"indices"`
+type SearchIndexesResponse struct {
+	Items []*Index `json:"items"`
 }
 
 type Error struct {
@@ -47,23 +47,23 @@ func (e Error) Error() string {
 	return fmt.Sprintf("code: %d, msg: %s", e.Code, e.Msg)
 }
 
-func (c *Client) CreateIndices(ctx context.Context, req CreateIndicesRequest) error {
-	return c.request(ctx, http.MethodPost, "/indices", req, nil)
+func (c *Client) CreateIndexes(ctx context.Context, req CreateIndexesRequest) error {
+	return c.request(ctx, http.MethodPost, "/indexes", req, nil)
 }
 
 func (c *Client) DeleteIndex(ctx context.Context, objectId string) error {
-	return c.request(ctx, http.MethodDelete, "/indices/"+objectId, nil, nil)
+	return c.request(ctx, http.MethodDelete, "/indexes/"+objectId, nil, nil)
 }
 
-func (c *Client) SearchIndices(ctx context.Context, req SearchIndicesRequest) (*SearchIndicesResponse, error) {
+func (c *Client) SearchIndexes(ctx context.Context, req SearchIndexesRequest) (*SearchIndexesResponse, error) {
 	values := url.Values{}
 	values.Add("keywords", req.Keywords)
 	if req.N != 0 {
 		values.Add("n", strconv.Itoa(req.N))
 	}
 
-	result := &SearchIndicesResponse{}
-	if err := c.request(ctx, http.MethodGet, "/indices/search?"+values.Encode(), nil, &result.Indices); err != nil {
+	result := &SearchIndexesResponse{}
+	if err := c.request(ctx, http.MethodGet, "/indexes/search?"+values.Encode(), nil, &result.Items); err != nil {
 		return nil, err
 	}
 	return result, nil

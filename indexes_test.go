@@ -4,9 +4,9 @@ import (
 	"context"
 )
 
-func (s *Suite) TestCreateIndices() {
-	err := s.client.CreateIndices(context.Background(), CreateIndicesRequest{
-		Items: []*CreateIndicesItem{
+func (s *Suite) TestCreateIndexes() {
+	err := s.client.CreateIndexes(context.Background(), CreateIndexesRequest{
+		Items: []*CreateIndexesItem{
 			{
 				ObjectID:   "test-object-id",
 				Category:   "plain-text",
@@ -23,8 +23,8 @@ func (s *Suite) TestDeleteIndex() {
 	s.NoError(err)
 }
 
-func (s *Suite) TestSearchIndices() {
-	_, err := s.client.SearchIndices(context.Background(), SearchIndicesRequest{
+func (s *Suite) TestSearchIndexes() {
+	_, err := s.client.SearchIndexes(context.Background(), SearchIndexesRequest{
 		Keywords: "test",
 	})
 	s.NoError(err)

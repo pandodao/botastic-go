@@ -15,7 +15,7 @@ import (
 
 func main() {
 	client := botastic.New("YOUR_APP_ID", "YOUR_APP_SECRET", botastic.WithHost("host..."), botastic.WithDebug(true))
-	resp, err := client.SearchIndices(context.Background(), botastic.SearchIndicesRequest{
+	resp, err := client.SearchIndexes(context.Background(), botastic.SearchIndexesRequest{
 		Keywords: "hello",
 		N:        10,
 	})
@@ -23,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	for _, index := range resp.Indices {
+	for _, index := range resp.Items {
 		println(index.ObjectID, index.Data)
 	}
 }
