@@ -48,7 +48,7 @@ func New(appID, appSecret string, opts ...Option) *Client {
 	c := &Client{
 		appID:     appID,
 		appSecret: appSecret,
-		host:      "", // TODO Set the default host after we release
+		host:      "https://botastic-api.pando.im/api",
 	}
 	for _, opt := range opts {
 		opt(c)
