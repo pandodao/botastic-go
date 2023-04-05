@@ -28,7 +28,9 @@ type Option func(*Client)
 
 func WithHost(host string) Option {
 	return func(c *Client) {
-		c.host = strings.TrimRight(host, "/") + "/api"
+		if host != "" {
+			c.host = strings.TrimRight(host, "/") + "/api"
+		}
 	}
 }
 
