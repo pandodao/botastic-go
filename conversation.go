@@ -101,9 +101,9 @@ func (c *Client) UpdateConversation(ctx context.Context, req UpdateConversationR
 	return c.request(ctx, http.MethodPut, "/conversations/"+req.ConversationID, req, nil)
 }
 
-func (c *Client) GetHandledConvTurn(ctx context.Context, conversationID string, turnID uint64) (*ConvTurn, error) {
+func (c *Client) GetConvTurn(ctx context.Context, conversationID string, turnID uint64, blockUntilResponse bool) (*ConvTurn, error) {
 	conv := &ConvTurn{}
-	if err := c.request(ctx, http.MethodGet, fmt.Sprintf("/conversations/%s/%d", conversationID, turnID), nil, conv); err != nil {
+	if err := c.request(ctx, http.MethodGet, fmt.Sprintf("/conversations/%s/%d?block_until_response=%t", conversationID, turnID, blockUntilResponse), nil, conv); err != nil {
 		return nil, err
 	}
 	return conv, nil

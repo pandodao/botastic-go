@@ -21,7 +21,7 @@ func (s *Suite) TestConversastion() {
 	})
 	s.NoError(err)
 
-	turn, err = s.client.GetHandledConvTurn(ctx, conv.ID, turn.ID)
+	turn, err = s.client.GetConvTurn(ctx, conv.ID, turn.ID, true)
 	s.NoError(err)
 
 	err = s.client.DeleteConversation(ctx, conv.ID)
