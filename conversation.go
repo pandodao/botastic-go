@@ -32,18 +32,21 @@ type App struct {
 }
 
 type ConvTurn struct {
-	ID             uint64     `json:"id"`
-	ConversationID string     `json:"conversation_id"`
-	BotID          uint64     `json:"bot_id"`
-	AppID          uint64     `json:"app_id"`
-	UserIdentity   string     `json:"user_identity"`
-	Request        string     `json:"request"`
-	RequestToken   int        `json:"request_token"`
-	Response       string     `json:"response"`
-	ResponseToken  int        `json:"response_token"`
-	Status         int        `json:"status"`
-	CreatedAt      *time.Time `json:"created_at"`
-	UpdatedAt      *time.Time `json:"updated_at"`
+	ID               uint64     `json:"id"`
+	ConversationID   string     `json:"conversation_id"`
+	BotID            uint64     `json:"bot_id"`
+	AppID            uint64     `json:"app_id"`
+	UserIdentity     string     `json:"user_identity"`
+	Request          string     `json:"request"`
+	Response         string     `json:"response"`
+	RequestToken     int        `json:"request_token"`
+	ResponseToken    int        `json:"response_token"`
+	PromptTokens     int        `json:"prompt_tokens"`
+	CompletionTokens int        `json:"completion_tokens"`
+	TotalTokens      int        `json:"total_tokens"`
+	Status           int        `json:"status"`
+	CreatedAt        *time.Time `json:"created_at"`
+	UpdatedAt        *time.Time `json:"updated_at"`
 }
 
 type Conversation struct {
